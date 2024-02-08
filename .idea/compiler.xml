@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="SharedPackages" />
+        <module name="Eureka-Server" />
+        <module name="CurrencyConversion" />
+        <module name="PaymentProcessing" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="CurrencyConversion" target="17" />
+      <module name="Eureka-Server" target="17" />
+      <module name="PaymentProcessing" target="17" />
+      <module name="SharedPackages" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="CurrencyConversion" options="-parameters" />
+      <module name="Eureka-Server" options="-parameters" />
+      <module name="PaymentProcessing" options="-parameters" />
+      <module name="SharedPackages" options="-parameters" />
+    </option>
+  </component>
+</project>
