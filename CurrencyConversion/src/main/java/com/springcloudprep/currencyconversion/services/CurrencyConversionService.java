@@ -6,8 +6,10 @@ import com.springcloudprep.currencyconversion.repositories.CurrencyConversionRep
 import com.springcloudprep.sharedpackages.enums.CountryName;
 import com.springcloudprep.sharedpackages.enums.CurrencyName;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class CurrencyConversionService {
@@ -31,12 +33,14 @@ public class CurrencyConversionService {
     }
 
     public CurrencyConvertDto convertCurrency(CurrencyName fromCurrency, CurrencyName toCurrency, double amount) {
+        log.info("Currency conversion is processing.....");
         CurrencyInfo fromCurrencyInfo = repo.findCurrencyInfoByCurrencyName(fromCurrency);
         CurrencyInfo toCurrencyInfo = repo.findCurrencyInfoByCurrencyName(toCurrency);
         if (fromCurrencyInfo == null || toCurrencyInfo == null)
             throw new RuntimeException("Can't able to convert currency!");
         double fromDollarAmount = fromCurrencyInfo.getEquivalentDollar() * amount;
         double convertedAmount = fromDollarAmount / toCurrencyInfo.getEquivalentDollar();
+        log.info("Conversion done!");
         return CurrencyConvertDto.builder().fromCurrency(fromCurrency).toCurrency(toCurrency).amount(amount).convertedAmount(convertedAmount).build();
     }
 }

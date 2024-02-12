@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: net.ttddyy.observation:datasource-micrometer-spring-boot:1.0.2">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/ttddyy/observation/datasource-micrometer-spring-boot/1.0.2/datasource-micrometer-spring-boot-1.0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/net/ttddyy/observation/datasource-micrometer-spring-boot/1.0.2/datasource-micrometer-spring-boot-1.0.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/ttddyy/observation/datasource-micrometer-spring-boot/1.0.2/datasource-micrometer-spring-boot-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

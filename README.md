@@ -104,3 +104,63 @@ microservice needs to call the Currency Conversion microservice for
 calculating the payable amount in purchaser's own currency. There are a
 few common classes and DTOs need to share among few microservices, those
 classes or DTOs are kept in SharedPackage.
+
+
+Well, Payment processing microservice is calling Currency Conversion microservice
+to convert payable currency to user's own currency. If this api call will
+fail for some unexpected reason, then **how can we trace the issue?**
+
+Here **Logging** comes to rescue us, for logging and monitoring I've used **Micrometer,
+Zipkin**. 
+
+To get those, we need to add the following dependencies,
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-actuator</artifactId>
+</dependency>
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-registry-prometheus</artifactId>
+</dependency>
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-tracing-bridge-brave</artifactId>
+</dependency>
+<dependency>
+    <groupId>io.zipkin.reporter2</groupId>
+    <artifactId>zipkin-reporter-brave</artifactId>
+    <version>2.16.3</version>
+</dependency>
+<dependency>
+    <groupId>net.ttddyy.observation</groupId>
+    <artifactId>datasource-micrometer-spring-boot</artifactId>
+    <version>1.0.2</version>
+</dependency>
+<dependency>
+    <groupId>io.github.openfeign</groupId>
+    <artifactId>feign-micrometer</artifactId>
+</dependency>
+```
+And add the following lines in application properties file,
+```properties
+management.endpoints.web.exposure.include=prometheus
+management.tracing.sampling.probability=1.0
+logging.pattern.level=%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]
+```
+
+We need Zipkin to monitor traces, I've used docker image of it. Here is the
+docker commands need to run Zipkin,
+
+Pull the latest Zipkin,
+```shell
+docker run openzipkin/zipkin
+```
+Run Zipkin using the following command
+```shell
+docker run --rm -it --name zipkin -p 9411:9411 openzipkin/zipkin
+```
+
+Zipkin will run on [http://localhost:9411/zipkin/](http://localhost:9411/zipkin/)
+and where we'll observe our APIs and trace each task independently.
+I'll explore more with observing and monitoring in distributed system later.

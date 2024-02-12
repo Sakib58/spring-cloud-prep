@@ -4,9 +4,11 @@ import com.springcloudprep.paymentprocessing.payloads.TransactionDto;
 import com.springcloudprep.paymentprocessing.service.PaymentService;
 import com.springcloudprep.sharedpackages.enums.CurrencyName;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/payment-process")
 @AllArgsConstructor
