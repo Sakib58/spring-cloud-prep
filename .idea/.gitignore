@@ -6,3 +6,4 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+/libraries/Maven__io_github_openfeign_feign_micrometer_13_1.xml
