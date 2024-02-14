@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: currency-service
+          uri: lb://CURRENCY-CONVERSION
+          predicates:
+            - Path=/api/currency-conversion/**
+          filters:
+            - StripPrefix=0
+        - id: payment-service
+          uri: lb://PAYMENT-PROCESSING
+          predicates:
+            - Path=/api/payment-process/**
+          filters:
+            - StripPrefix=0
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+server:
+  port: 9095

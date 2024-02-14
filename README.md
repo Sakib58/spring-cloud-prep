@@ -164,3 +164,55 @@ docker run --rm -it --name zipkin -p 9411:9411 openzipkin/zipkin
 Zipkin will run on [http://localhost:9411/zipkin/](http://localhost:9411/zipkin/)
 and where we'll observe our APIs and trace each task independently.
 I'll explore more with observing and monitoring in distributed system later.
+
+Consider one more case, If my application has lots of microservices running
+on different ports, then how do we manage authentication for each request and 
+response on different services? Or how do we manage that which request
+will be served by which services? So we need a centralized service that
+will enforce security by managing the traffic of API request and responses.
+And that service is called **API gateway**.
+
+To implement spring cloud api gateway, we need the following dependencies,
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-gateway</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-netflix-eureka-client</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+</dependency>
+```
+
+Here, API gateway need to register itself to Eureka Server because it needs
+to find all the instances of any services and need load balancer to distribute
+load among them.
+
+In this example, I've used the following configurations for routings,
+```yaml
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: currency-service
+          uri: lb://CURRENCY-CONVERSION
+          predicates:
+            - Path=/api/currency-conversion/**
+          filters:
+            - StripPrefix=0
+        - id: payment-service
+          uri: lb://PAYMENT-PROCESSING
+          predicates:
+            - Path=/api/payment-process/**
+          filters:
+            - StripPrefix=0
+```
+If any request comes to this service with prefix `/api/currency-conversion`,
+this will redirect to the `CURRENCY-CONVERSION` service. I've used
+`StripPrefix=0` so that request to that service keeps same as predicates, if I use
+`StripPrefix=1`, then new request will be stripped by 1 word and that'll
+look like `/cuurency-conversion/**`.
