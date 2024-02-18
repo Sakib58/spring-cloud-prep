@@ -8,6 +8,8 @@
         <option value="$PROJECT_DIR$/CurrencyConversion/pom.xml" />
         <option value="$PROJECT_DIR$/SharedPackages/pom.xml" />
         <option value="$PROJECT_DIR$/ApiGateway/pom.xml" />
+        <option value="$PROJECT_DIR$/AMQP/pom.xml" />
+        <option value="$PROJECT_DIR$/NotificationService/pom.xml" />
       </list>
     </option>
   </component>

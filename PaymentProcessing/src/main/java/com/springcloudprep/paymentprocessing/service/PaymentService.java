@@ -4,6 +4,7 @@ import com.springcloudprep.paymentprocessing.models.Account;
 import com.springcloudprep.paymentprocessing.models.User;
 import com.springcloudprep.paymentprocessing.payloads.CurrencyConvertDto;
 import com.springcloudprep.paymentprocessing.payloads.TransactionDto;
+import com.springcloudprep.sharedpackages.dto.NotificationDto;
 import com.springcloudprep.sharedpackages.enums.CurrencyName;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,7 @@ public class PaymentService {
         return currencyConvertDto.getConvertedAmount();
     }
 
-    public void payCosting(double amount, CurrencyName toCurrency, TransactionDto transactionDto) {
+    public NotificationDto payCosting(double amount, CurrencyName toCurrency, TransactionDto transactionDto) {
         Optional<User> optionalUser = userService.findUserById(transactionDto.getUserId());
         if (optionalUser.isEmpty())
             throw new IllegalArgumentException("Transaction failed! User not found!");
@@ -43,5 +44,12 @@ public class PaymentService {
         if (accountAfterWithdraw.getBalance() != user.getAccount().getBalance())
             throw new RuntimeException("Payment successful with error!");
         log.info("Payment successful!");
+        return NotificationDto.builder()
+                .userId(transactionDto.getUserId())
+                .fromCurrency(user.getCurrencyName())
+                .toCurrency(toCurrency)
+                .amount(amount)
+                .amountInOwnCurrency(deductionAmount)
+                .build();
     }
 }

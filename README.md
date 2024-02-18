@@ -216,3 +216,46 @@ this will redirect to the `CURRENCY-CONVERSION` service. I've used
 `StripPrefix=0` so that request to that service keeps same as predicates, if I use
 `StripPrefix=1`, then new request will be stripped by 1 word and that'll
 look like `/cuurency-conversion/**`.
+
+In addition to the payment-processing microservice, I want another microservice
+which involves sending notifications to users after each transaction is 
+completed. Sounds straightforward, right? Well, not quite.
+
+
+The challenge arises when we consider that sending notifications often 
+involves interacting with third-party services, which can be slow and 
+unpredictable. For example, let's say our notification service takes a 
+minimum of 10 seconds to send each notification. If our payment-processing 
+microservice were to wait for each notification to be sent before 
+continuing its work, it would effectively be idle for those 10 seconds, 
+leading to inefficient resource utilization and potentially slower 
+transaction processing times.
+
+Enter **RabbitMQ, a message-brokering system that allows for asynchronous 
+communication between different parts of our system**. Instead of directly 
+sending notifications from the payment-processing microservice to the 
+notification service and waiting for a response, we can leverage RabbitMQ 
+to decouple these processes.
+
+**Here's how it works:** when a transaction is completed, the 
+payment-processing microservice simply publishes a notification message 
+to a designated queue in RabbitMQ and moves on with its work without 
+waiting for a response. Meanwhile, the notification service continuously 
+listens to this queue, picking up incoming notification messages as they 
+arrive.
+
+By using RabbitMQ, we've effectively offloaded the responsibility of 
+sending notifications from the payment-processing microservice to the 
+notification service. This asynchronous communication model allows both 
+services to operate independently and efficiently, without one service 
+being held up by the other's potentially time-consuming tasks.
+
+In essence, RabbitMQ acts as a reliable intermediary, enabling seamless 
+communication between different parts of our system while maximizing 
+performance and scalability. With RabbitMQ handling the heavy lifting of 
+message queuing and delivery, our payment-processing microservice can 
+focus on what it does best: processing transactions quickly and efficiently.
+
+I've recently completed an implementation of RabbitMQ in a new project, 
+and I've thoroughly documented the process for anyone interested. You 
+can find all the details and code samples on my [Github Repository](https://github.com/Sakib58/rabbitmq-spring-boot).

@@ -6,26 +6,32 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="AMQP" />
         <module name="SharedPackages" />
         <module name="Eureka-Server" />
         <module name="CurrencyConversion" />
+        <module name="NotificationService" />
         <module name="PaymentProcessing" />
         <module name="ApiGateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="AMQP" target="17" />
       <module name="ApiGateway" target="17" />
       <module name="CurrencyConversion" target="17" />
       <module name="Eureka-Server" target="17" />
+      <module name="NotificationService" target="17" />
       <module name="PaymentProcessing" target="17" />
       <module name="SharedPackages" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="AMQP" options="-parameters" />
       <module name="ApiGateway" options="-parameters" />
       <module name="CurrencyConversion" options="-parameters" />
       <module name="Eureka-Server" options="-parameters" />
+      <module name="NotificationService" options="-parameters" />
       <module name="PaymentProcessing" options="-parameters" />
       <module name="SharedPackages" options="-parameters" />
     </option>

@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AMQP/AMQP.iml" filepath="$PROJECT_DIR$/AMQP/AMQP.iml" />
       <module fileurl="file://$PROJECT_DIR$/ApiGateway/ApiGateway.iml" filepath="$PROJECT_DIR$/ApiGateway/ApiGateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/CurrencyConversion/CurrencyConversion.iml" filepath="$PROJECT_DIR$/CurrencyConversion/CurrencyConversion.iml" />
       <module fileurl="file://$PROJECT_DIR$/Eureka-Server/Eureka-Server.iml" filepath="$PROJECT_DIR$/Eureka-Server/Eureka-Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NotificationService/NotificationService.iml" filepath="$PROJECT_DIR$/NotificationService/NotificationService.iml" />
       <module fileurl="file://$PROJECT_DIR$/PaymentProcessing/PaymentProcessing.iml" filepath="$PROJECT_DIR$/PaymentProcessing/PaymentProcessing.iml" />
       <module fileurl="file://$PROJECT_DIR$/SharedPackages/SharedPackages.iml" filepath="$PROJECT_DIR$/SharedPackages/SharedPackages.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/SpringCloudPrep.iml" filepath="$PROJECT_DIR$/.idea/SpringCloudPrep.iml" />
