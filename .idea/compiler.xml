@@ -23,17 +23,18 @@
       <module name="NotificationService" target="17" />
       <module name="PaymentProcessing" target="17" />
       <module name="SharedPackages" target="17" />
+      <module name="SpringCloudPrep" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="AMQP" options="-parameters" />
-      <module name="ApiGateway" options="-parameters" />
-      <module name="CurrencyConversion" options="-parameters" />
-      <module name="Eureka-Server" options="-parameters" />
-      <module name="NotificationService" options="-parameters" />
-      <module name="PaymentProcessing" options="-parameters" />
-      <module name="SharedPackages" options="-parameters" />
+      <module name="AMQP" options="" />
+      <module name="ApiGateway" options="" />
+      <module name="CurrencyConversion" options="" />
+      <module name="Eureka-Server" options="" />
+      <module name="NotificationService" options="" />
+      <module name="PaymentProcessing" options="" />
+      <module name="SharedPackages" options="" />
     </option>
   </component>
 </project>
